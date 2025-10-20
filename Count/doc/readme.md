@@ -86,16 +86,3 @@ PyMC uses the form
 so we define \( \alpha = 1/\phi \).
 
 ---
-
-##  Visualization: pseudo-log transform
-
-To visualize zero counts and high dynamic range on one axis, we use the
-**base-10 pseudo-log** transform:
-\[
-y' = \operatorname{asinh}\!\left(\frac{(y/5)}{\ln 10}\right),
-\]
-which is linear near zero and logarithmic at large \(y\).
-
-Tick labels correspond to 0, \(10^1\), \(10^2\), \(10^3\), \(10^4\), \(10^5\).
-
----
