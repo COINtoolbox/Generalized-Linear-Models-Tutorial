@@ -1,6 +1,6 @@
 # Bayesian Negative Binomial Regression for Globular Cluster Populations
 
-This repository accompanies *de Souza et al. (2015)* and updates the example with
+This repository accompanies [*de Souza et al. (2015)*](https://academic.oup.com/mnras/article/453/2/1928/1154495) and updates the example with
 modern Bayesian workflows in **NIMBLE** and **PyMC**.  
 It models the relation between globular-cluster counts and galaxy stellar mass
 using Negative Binomial regression with **Errors-in-Variables (EIV)**.
@@ -9,12 +9,12 @@ using Negative Binomial regression with **Errors-in-Variables (EIV)**.
 
 ## 🧭 Repository structure
 
-- [📗 NIMBLE.md](NIMBLE.md) – canonical R/NIMBLE implementation from the paper  
-- [🐍 PyMC.md](PyMC.md) – Python/PyMC version with optional JAX acceleration  
+- [📗NB nimble](https://github.com/COINtoolbox/Generalized-Linear-Models-Tutorial/blob/master/Count/scripts/NegBin_nimble.R) – canonical R/NIMBLE implementation from the paper  
+- [🐍 NB PyMC](https://github.com/COINtoolbox/Generalized-Linear-Models-Tutorial/blob/master/Count/scripts/negbin_pymc.py) – Python/PyMC version
 
 ---
 
-## 1️⃣ Conceptual background
+##  Conceptual background
 
 ### 1.1 Poisson GLM
 The classical Poisson Generalized Linear Model assumes **equidispersion**:
@@ -43,7 +43,7 @@ which makes the source of extra-Poisson variability explicit.
 
 ---
 
-## 2️⃣ Model extensions
+## Model extensions
 
 ### 2.1 Errors-in-Variables (EIV)
 In this application, the predictor  
@@ -72,7 +72,7 @@ For high-quality counts, a single-layer NB likelihood is usually sufficient and 
 
 ---
 
-## 3️⃣ Parameterization and priors
+## Parameterization and priors
 
 | Parameter | Distribution | Notes |
 |------------|---------------|-------|
@@ -86,39 +86,32 @@ PyMC uses the form
 so we define \( \alpha = 1/\phi \).
 
 ---
+## Bibtex entry
 
-## 4️⃣ Inference and computation
+If you use this tutorial in your research, we kindly as you to cite the original paper:
 
-- **All-continuous model** ⇒ NUTS or JAX-accelerated NUTS.  
-- **Discrete latents** (if you keep \(N_{\text{true}}\)) ⇒ mixture of NUTS + Metropolis → slow.  
-- **Marginalized NB⊗Normal** → continuous again, NUTS-only.
+[de Souza, R. S.,  *et al.*,  The overlooked potential of generalized linear models in astronomy - III. Bayesian negative binomial regression and globular cluster populations, MNRAS, vol. 453, p.1928-1940](http://adsabs.harvard.edu/abs/2015MNRAS.453.1928D)
 
-### Performance tips
-| Technique | Gain |
-|------------|------|
-| Drop measurement error on \(N\) | 5–20× faster |
-| Reduce grid (e.g. M=1000) | ≈4× less memory |
-| JAX `numpyro_nuts` vectorized chains | 2–5× faster on CPU/GPU |
-| `delim_whitespace=True` when reading COIN CSV | avoids parsing errors |
+The corresponding bibitex entry is:
 
----
+```
 
-## 5️⃣ Visualization: pseudo-log transform
-
-To visualize zero counts and high dynamic range on one axis, we use the
-**base-10 pseudo-log** transform:
-\[
-y' = \operatorname{asinh}\!\left(\frac{(y/5)}{\ln 10}\right),
-\]
-which is linear near zero and logarithmic at large \(y\).
-
-Tick labels correspond to 0, \(10^1\), \(10^2\), \(10^3\), \(10^4\), \(10^5\).
-
----
-
-## 6️⃣ Elliptical galaxies subset
-
-Restrict the analysis to ellipticals (e.g., for morphology-specific scaling):
-
-```python
-df = df[df["Type"].astype(str).str.startswith("E")].copy()
+@ARTICLE{2015MNRAS.453.1928D,
+   author = {{de Souza}, R.~S. and {Hilbe}, J.~M. and {Buelens}, B. and {Riggs}, J.~D. and 
+	{Cameron}, E. and {Ishida}, E.~E.~O. and {Chies-Santos}, A.~L. and 
+	{Killedar}, M.},
+    title = "{The overlooked potential of generalized linear models in astronomy - III. Bayesian negative binomial regression and globular cluster populations}",
+  journal = {\mnras},
+archivePrefix = "arXiv",
+   eprint = {1506.04792},
+ primaryClass = "astro-ph.IM",
+ keywords = {methods: data analysis, methods: statistical, globular clusters: general},
+     year = 2015,
+    month = oct,
+   volume = 453,
+    pages = {1928-1940},
+      doi = {10.1093/mnras/stv1825},
+   adsurl = {http://adsabs.harvard.edu/abs/2015MNRAS.453.1928D},
+  adsnote = {Provided by the SAO/NASA Astrophysics Data System}
+}
+```
