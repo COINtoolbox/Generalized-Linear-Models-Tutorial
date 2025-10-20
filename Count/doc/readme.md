@@ -9,7 +9,7 @@ using Negative Binomial regression with **Errors-in-Variables (EIV)**.
 
 ## 🧭 Repository structure
 
-- [📗 NIMBLE.md](NIMBLE.md) – canonical R/NIMBLE implementation from the paper  
+- [📗 NIMBLE.md](Count/scripts/NegBin_nimble.R) – canonical R/NIMBLE implementation from the paper  
 - [🐍 PyMC.md](PyMC.md) – Python/PyMC version with optional JAX acceleration  
 
 ---
