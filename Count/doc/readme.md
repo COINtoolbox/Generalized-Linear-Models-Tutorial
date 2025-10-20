@@ -14,7 +14,7 @@ using Negative Binomial regression with **Errors-in-Variables (EIV)**.
 
 ---
 
-## 1️⃣ Conceptual background
+##  Conceptual background
 
 ### 1.1 Poisson GLM
 The classical Poisson Generalized Linear Model assumes **equidispersion**:
@@ -43,7 +43,7 @@ which makes the source of extra-Poisson variability explicit.
 
 ---
 
-## 2️⃣ Model extensions
+## Model extensions
 
 ### 2.1 Errors-in-Variables (EIV)
 In this application, the predictor  
@@ -72,7 +72,7 @@ For high-quality counts, a single-layer NB likelihood is usually sufficient and 
 
 ---
 
-## 3️⃣ Parameterization and priors
+## Parameterization and priors
 
 | Parameter | Distribution | Notes |
 |------------|---------------|-------|
@@ -87,23 +87,7 @@ so we define \( \alpha = 1/\phi \).
 
 ---
 
-## 4️⃣ Inference and computation
-
-- **All-continuous model** ⇒ NUTS or JAX-accelerated NUTS.  
-- **Discrete latents** (if you keep \(N_{\text{true}}\)) ⇒ mixture of NUTS + Metropolis → slow.  
-- **Marginalized NB⊗Normal** → continuous again, NUTS-only.
-
-### Performance tips
-| Technique | Gain |
-|------------|------|
-| Drop measurement error on \(N\) | 5–20× faster |
-| Reduce grid (e.g. M=1000) | ≈4× less memory |
-| JAX `numpyro_nuts` vectorized chains | 2–5× faster on CPU/GPU |
-| `delim_whitespace=True` when reading COIN CSV | avoids parsing errors |
-
----
-
-## 5️⃣ Visualization: pseudo-log transform
+##  Visualization: pseudo-log transform
 
 To visualize zero counts and high dynamic range on one axis, we use the
 **base-10 pseudo-log** transform:
@@ -115,10 +99,3 @@ which is linear near zero and logarithmic at large \(y\).
 Tick labels correspond to 0, \(10^1\), \(10^2\), \(10^3\), \(10^4\), \(10^5\).
 
 ---
-
-## 6️⃣ Elliptical galaxies subset
-
-Restrict the analysis to ellipticals (e.g., for morphology-specific scaling):
-
-```python
-df = df[df["Type"].astype(str).str.startswith("E")].copy()
