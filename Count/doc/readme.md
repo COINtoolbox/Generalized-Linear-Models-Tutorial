@@ -10,7 +10,7 @@ using Negative Binomial regression with **Errors-in-Variables (EIV)**.
 ## 🧭 Repository structure
 
 - [📗NB nimble](https://github.com/COINtoolbox/Generalized-Linear-Models-Tutorial/blob/master/Count/scripts/NegBin_nimble.R) – canonical R/NIMBLE implementation from the paper  
-- [🐍 NB PyMC](https://github.com/COINtoolbox/Generalized-Linear-Models-Tutorial/blob/master/Count/scripts/negbin_pymc.py) – Python/PyMC version with optional JAX acceleration  
+- [🐍 NB PyMC](https://github.com/COINtoolbox/Generalized-Linear-Models-Tutorial/blob/master/Count/scripts/negbin_pymc.py) – Python/PyMC version
 
 ---
 
