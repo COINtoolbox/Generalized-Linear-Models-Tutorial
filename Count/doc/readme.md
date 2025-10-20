@@ -1,6 +1,6 @@
 # Bayesian Negative Binomial Regression for Globular Cluster Populations
 
-This repository accompanies *de Souza et al. (2015)* and updates the example with
+This repository accompanies [*de Souza et al. (2015)*]{https://academic.oup.com/mnras/article/453/2/1928/1154495} and updates the example with
 modern Bayesian workflows in **NIMBLE** and **PyMC**.  
 It models the relation between globular-cluster counts and galaxy stellar mass
 using Negative Binomial regression with **Errors-in-Variables (EIV)**.
